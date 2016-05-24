@@ -30,3 +30,6 @@
 
 #####四、关于
 如有任何问题，请与我联系 email:smallzoo@foxmail.com
+
+#####五、关于json转换库
+http://nutzam.com/core/json/to.html
