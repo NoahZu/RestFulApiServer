@@ -1,4 +1,4 @@
-package io.github.noahzu.entity;
+package io.github.noahzu.core;
 
 import com.sun.net.httpserver.HttpExchange;
 

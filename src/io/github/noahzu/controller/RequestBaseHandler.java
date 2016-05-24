@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import io.github.noahzu.constant.StatusCode;
-import io.github.noahzu.entity.HttpRequest;
+import io.github.noahzu.core.HttpRequest;
 
 public abstract class RequestBaseHandler {
 	private RequestBaseFilter mRequestFilter = null;

@@ -1,6 +1,6 @@
 package io.github.noahzu.controller;
 
-import io.github.noahzu.entity.HttpRequest;
+import io.github.noahzu.core.HttpRequest;
 
 import java.io.IOException;
 import java.util.ArrayList;

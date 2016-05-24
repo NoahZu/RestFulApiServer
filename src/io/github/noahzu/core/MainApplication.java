@@ -1,4 +1,4 @@
-package io.github.noahzu;
+package io.github.noahzu.core;
 
 import io.github.noahzu.constant.Configs;
 import io.github.noahzu.handlers.TalkRequestHandler;

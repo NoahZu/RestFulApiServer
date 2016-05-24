@@ -1,4 +1,4 @@
-package io.github.noahzu;
+package io.github.noahzu.core;
 
 import io.github.noahzu.controller.RequestController;
 import io.github.noahzu.utils.Logger;
