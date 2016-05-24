@@ -1,20 +1,27 @@
 package io.github.noahzu.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+
+import org.nutz.lang.stream.StringOutputStream;
 
 import io.github.noahzu.constant.StatusCode;
 import io.github.noahzu.core.HttpRequest;
+import io.github.noahzu.core.RequestController;
 
 public abstract class RequestBaseHandler {
 	private RequestBaseFilter mRequestFilter = null;
 	private HttpRequest mRequest;
+	private String mContext;
 	
 	/**
 	 * 空的构造函数
 	 */
-	public RequestBaseHandler(){
-		
+	public RequestBaseHandler(String context){
+		this.mContext = context;
 	}
 	/**
 	 * 带有一个过滤器的构造函数
@@ -26,11 +33,11 @@ public abstract class RequestBaseHandler {
 	
 	public void handle(HttpRequest request) throws IOException{
 		mRequest = request;
-		if(mRequestFilter != null){
-			request = mRequestFilter.onFilter(request);
-		}//先通过过滤器
-		String responseString  = handleRequest(request);
-		sendResponse(responseString,request);
+		boolean b = mRequestFilter == null ? false : mRequestFilter.onFilter(request);
+		if(!b){
+			String responseString  = handleRequest(request);
+			sendResponse(responseString,request);			
+		}
 	}
 	
 	/**
@@ -40,9 +47,12 @@ public abstract class RequestBaseHandler {
 	 * @throws IOException 
 	 */
 	private void sendResponse(String responseString,HttpRequest request) throws IOException {
-		request.getExchange().sendResponseHeaders(StatusCode.REPONSE_SUCCESS, responseString.length());
+		request.getExchange().sendResponseHeaders(StatusCode.REPONSE_SUCCESS, responseString.getBytes().length);
         OutputStream os = request.getExchange().getResponseBody();
-        os.write(responseString.getBytes());
+        OutputStreamWriter writer = new OutputStreamWriter(os,"utf-8");
+        writer.write(responseString);
+        writer.flush();
+        writer.close();
         os.close();
 	}
 	/**
@@ -63,5 +73,9 @@ public abstract class RequestBaseHandler {
 	 */
 	public void init(){
 		RequestController.getInstance().addRequest(this);
+	}
+	
+	public String getContext(){
+		return mContext;
 	}
 }

@@ -1,6 +1,6 @@
-package io.github.noahzu.controller;
+package io.github.noahzu.core;
 
-import io.github.noahzu.core.HttpRequest;
+import io.github.noahzu.controller.RequestBaseHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +30,11 @@ public class RequestController implements HttpHandler {
 	
 	@Override
 	public void handle(HttpExchange httpExchange) throws IOException {
-		//todo 遍历所有的request，发出通知
+		//寻找出匹配的请求处理器来出来
 		for(RequestBaseHandler handler : handlers){
-			handler.handle(new HttpRequest(httpExchange));
+			if(handler.getContext().equals(httpExchange.getHttpContext().getPath())){
+				handler.handle(new HttpRequest(httpExchange));				
+			}
 		}
 	}
 
