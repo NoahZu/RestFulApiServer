@@ -13,7 +13,7 @@ public class CommitTalkRequestHandler extends RequestBaseHandler {
 	private static final String TAG = "CommitTalkRequestHandler";
 
 	public CommitTalkRequestHandler(){
-		super(Configs.COMMIT_TALK);
+		super(Configs.COMMIT_TALK_CONTEXT);
 	}
 	
 	@Override

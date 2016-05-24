@@ -35,4 +35,10 @@
 http://nutzam.com/core/json/to.html
 
 #####六、api
-http://139.129.59.163:8000/Talk&nbsp;&nbsp;&nbsp;获取所有的talk
+	
+	http://139.129.59.163:8000/Talk?page=1&pagesize=10   获取所有的talk
+	http://139.129.59.163:8000/Login  将用户名和密码放在post请求中，字段分别为userName passWord
+		比如：http://localhost:8000/Login?userName=admin&passWord=123
+	http://139.129.59.163:8000/CommitTalk 将提交的内容放在post请求中 字段为content
+	 
+	
