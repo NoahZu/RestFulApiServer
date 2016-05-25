@@ -1,14 +1,14 @@
 package io.github.noahzu.handlers;
 
-import org.nutz.json.Json;
-
-import com.sun.net.httpserver.HttpExchange;
-
 import io.github.noahzu.constant.Configs;
 import io.github.noahzu.controller.RequestBaseHandler;
 import io.github.noahzu.core.HttpRequest;
 import io.github.noahzu.db.MySqlHandler;
 import io.github.noahzu.entity.User;
+
+import org.nutz.json.Json;
+
+import com.sun.net.httpserver.HttpExchange;
 
 public class LoginRequestHandler extends RequestBaseHandler {
 
@@ -19,8 +19,9 @@ public class LoginRequestHandler extends RequestBaseHandler {
 	@Override
 	public String handleRequest(HttpRequest request) {
 		HttpExchange exchange = request.getExchange();
-		String userName = exchange.getAttribute("userName") == null ? "" : exchange.getAttribute("userName").toString();
-		String passWord = exchange.getAttribute("passWord") == null ? "" : exchange.getAttribute("passWord").toString();
+		getRequestURIparameter("", exchange);
+		String userName = getRequestURIparameter("userName", exchange);
+		String passWord = getRequestURIparameter("passWord", exchange);
 		if(userName.equals("") || passWord.equals("")){
 			return "false";
 		}

@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.net.URI;
 
 import org.nutz.lang.stream.StringOutputStream;
+
+import com.sun.net.httpserver.HttpExchange;
 
 import io.github.noahzu.constant.StatusCode;
 import io.github.noahzu.core.HttpRequest;
@@ -78,4 +81,16 @@ public abstract class RequestBaseHandler {
 	public String getContext(){
 		return mContext;
 	}
+	
+	public String getRequestURIparameter(String key,HttpExchange exchange){
+		String uri = exchange.getRequestURI().getQuery();
+		String[] params = uri.split("&");
+		for(String param : params){
+			if(param.split("=")[0].equals(key)){
+				return param.split("=")[1];
+			}
+		}
+		return "";
+	}
 }
+
